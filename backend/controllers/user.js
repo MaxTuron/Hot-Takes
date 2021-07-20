@@ -12,3 +12,15 @@ exports.signup = (req, res, next) => {
         .catch(error => res.status(400).json({ error })); // Bad Request
 };
 
+
+exports.login = (req, res, next) => {
+    User.findOne({ email: req.body.email })   // On utilise le modèle mongoose User pour vérifier que l'email rentré correspond à un email de la bas de données
+        .then(user => {
+            if (!user) {
+                return res.status(401).json({ error: 'Utilisateur non trouvé !' }); // Unauthorized
+            }
+                    res.status(200).json({ // Requête traitée avec succès
+                        userId: user._id,     // On renvoie l'id
+                    });
+        })
+};

@@ -12,8 +12,6 @@ mongoose.connect('mongodb+srv://Max:3174uwk02h@cluster0.qtlwm.mongodb.net/testAP
 
 const app = express();
 
-
-
 //Header
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
