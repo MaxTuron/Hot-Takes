@@ -1,8 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const app = express();
 const mongoose = require('mongoose');
 
-const userRoutes = require('./routes/user')
+const sauceRoutes = require('./routes/sauce');
+const userRoutes = require('./routes/user');
+
 
 mongoose.connect('mongodb+srv://Max:3174uwk02h@cluster0.qtlwm.mongodb.net/testAPI?retryWrites=true&w=majority',
     { useNewUrlParser: true,
@@ -10,18 +12,20 @@ mongoose.connect('mongodb+srv://Max:3174uwk02h@cluster0.qtlwm.mongodb.net/testAP
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-const app = express();
 
-//Header
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.setHeader('Access-Control-Allow-Origin', '*'); //accède à l'api depuis n'importe quelle origine
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'); //ajoute les headers aux requêtes envoyées vers l'API
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'); //envoie les requêtes avec les méthodes mentionnées
     next();
 });
 
-app.use(bodyParser.json());
+//body parser
+app.use(express.json());
 
+//routes
+app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
+
 
 module.exports = app;
