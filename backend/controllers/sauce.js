@@ -1,22 +1,22 @@
+//Logique métier
 const Sauce = require('../models/sauce');
 
+//Création d'une sauce
 exports.createSauce = (req, res, next) => {
-    delete req.body._id;
+
+    const sauceObject = JSON.parse(req.body.sauce);
+    delete sauceObject._id;
     const sauce = new Sauce({
-        name: req.body.name,
-        manufacturer: req.body.manufacturer,
-        description: req.body.description,
-        imageUrl: req.body.imageUrl,
-        mainPepper: req.body.mainPepper,
-        heat: req.body.heat,
+        ...sauceObject,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
-    console.log(sauce)
+    console.log(sauce);
     sauce.save()
-        .then(() => res.status(201).json({ message: 'Sauce enregistrée !'}))
-        .catch(error => res.status(400).json({ error }));
-};
+        .then(() => res.status(201).json({message: 'Sauce enregistrée !'}))
+        .catch(error => res.status(400).json({error}));
+}
 
-
+//Fonction OK
 exports.getAllSauces = (req, res, next) => {
     Sauce.find().then(
         (sauce) => {

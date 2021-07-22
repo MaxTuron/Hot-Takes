@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 
 const sauceRoutes = require('./routes/sauce');
@@ -12,6 +11,7 @@ mongoose.connect('mongodb+srv://Max:3174uwk02h@cluster0.qtlwm.mongodb.net/testAP
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
+const app = express();
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*'); //accède à l'api depuis n'importe quelle origine
