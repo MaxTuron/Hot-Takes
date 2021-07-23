@@ -26,3 +26,11 @@ exports.getAllSauces = (req, res, next) => {
     );
 };
 
+// Fonction OK
+exports.getOneSauce = (req, res, next) => {
+    Sauce.findOne({                 // Renvoir le Thing unique ayant le même _id que le paramètre de la requêt
+        _id: req.params.id      // On récupère l'id de la sauce
+    })
+        .then(sauce => res.status(200).json(sauce))   // Sauce retournée dans une promise et envoyée au frontend
+        .catch(error => res.status(404).json({error}));
+}
