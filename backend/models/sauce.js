@@ -1,12 +1,18 @@
 const mongoose = require('mongoose');
 
+// Création d'un schéma de données pour les sauces
 const sauceSchema = mongoose.Schema({
-    name: {type: String},
-    manufacturer: {type: String},
-    description: {type: String},
-    mainPepper: {type: String},
-    imageUrl: {type: String},
-    heat: {type: Number},
+    userId: { type: String, required: true },
+    name: { type: String, required: true },
+    manufacturer: { type: String, required: true },
+    description: { type: String, required: true },
+    mainPepper: { type: String, required: true },
+    imageUrl: { type: String, required: true },
+    heat: { type: Number, required: true },
+    likes: { type: Number },
+    dislikes: { type: Number },
+    usersLiked: { type: [String] },
+    usersDisliked: { type: [String] },
 });
 
 module.exports = mongoose.model('Sauce', sauceSchema); // on exporte le schéma de données
