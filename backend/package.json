@@ -14,9 +14,11 @@
     "express": "^4.17.1",
     "fs": "*",
     "lodash.foreach": "^4.5.0",
+    "mkdirp": "^0.5.5",
     "mongoose": "^5.13.3",
     "mongoose-unique-validator": "^2.0.3",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "shelljs": "^0.8.4"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",

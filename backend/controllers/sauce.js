@@ -8,7 +8,7 @@ exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
     delete sauceObject._id;
 
-    //est-ce que ma sauce existe ? (findOne) Si oui -> redirect vers edit Sauce / si non -> on continue
+
     const sauce = new Sauce({
         ...sauceObject,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`

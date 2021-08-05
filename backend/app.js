@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const fs = require('fs')
+const filesDir = 'images';
 const path = require('path');
 
 //Import des routes
@@ -25,6 +27,12 @@ app.use((req, res, next) => {
 
 //body parser
 app.use(express.json());
+
+
+//Permet de créer le dossier images si il n'existe pas
+if (!fs.existsSync(filesDir)) {
+    fs.mkdirSync(filesDir);
+}
 
 //Définition du dossier ou les images seront intégrer
 app.use('/images', express.static(path.join(__dirname, 'images')));
