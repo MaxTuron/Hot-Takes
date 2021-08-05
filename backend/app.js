@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config()
+const mongodb = process.env.MONGODB;
 const fs = require('fs')
 const filesDir = 'images';
 const path = require('path');
@@ -9,7 +11,7 @@ const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
 //Connexion à la base de données
-mongoose.connect('mongodb+srv://Max:3174uwk02h@cluster0.qtlwm.mongodb.net/testAPI?retryWrites=true&w=majority',
+mongoose.connect(mongodb,
     { useNewUrlParser: true,
         useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))
