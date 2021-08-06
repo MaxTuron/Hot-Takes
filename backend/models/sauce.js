@@ -9,8 +9,10 @@ const sauceSchema = mongoose.Schema({
     mainPepper: { type: String, required: true },
     imageUrl: { type: String, required: true },
     heat: { type: Number, required: true },
-    likes: { type: Number },
-    dislikes: { type: Number },
+    //Deflaut 0 pour éviter que lors de la 1ere utilisation NaN soit afficher
+    likes: { type: Number,  default: 0 },
+    //Deflaut 0 pour éviter que lors de la 1ere utilisation NaN soit afficher
+    dislikes: { type: Number,  default: 0 },
     usersLiked: { type: [String] },
     usersDisliked: { type: [String] },
 });

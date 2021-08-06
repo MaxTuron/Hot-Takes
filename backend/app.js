@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+//Import de dotenv pour sécuriser les mots de passes
 require('dotenv').config()
+//Sécurisation de la BDD via dotenv
 const mongodb = process.env.MONGODB;
-const fs = require('fs')
+const fs = require('fs');
 const filesDir = 'images';
 const path = require('path');
 
