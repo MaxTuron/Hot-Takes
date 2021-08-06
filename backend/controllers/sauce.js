@@ -7,7 +7,6 @@ const fs = require('fs');
 exports.createSauce = (req, res, next) => {
 
     const sauceObject = JSON.parse(req.body.sauce);
-    delete sauceObject._id;
 
     //Création de la sauce
     const sauce = new Sauce({
@@ -22,9 +21,8 @@ exports.createSauce = (req, res, next) => {
 
 //Récupération de toutes les sauces
 exports.getAllSauces = (req, res, next) => {
-    Sauce.find().then(
-        (sauce) => {
-            res.status(200).json(sauce);})
+    Sauce.find()
+        .then((sauce) => {res.status(200).json(sauce);})
         .catch((error) => {res.status(400).json({error: error});
         }
     );
