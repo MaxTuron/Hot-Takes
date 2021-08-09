@@ -1,3 +1,4 @@
+//Permet de faire fonctionner le serveur node
 const http = require('http');
 const app = require('./app');
 
@@ -13,9 +14,12 @@ const normalizePort = val => {
     }
     return false;
 };
+
+//Permet d'avoir un port valide
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+//Recherche les différentes erreurs et les gère de manière appropriée.
 const errorHandler = error => {
     if (error.syscall !== 'listen') {
         throw error;

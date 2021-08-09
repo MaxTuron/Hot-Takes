@@ -70,31 +70,25 @@ exports.likeSauce = (req, res, next) => {
             switch (like) {
                 case 1:
                     Sauce.updateOne({ _id: req.params.id }, { $inc: { likes: 1 }, $push: { usersLiked: userId } })
-                        .then(() => {
-                            res.status(200).json({ message: "Like !" });
-                        })
+                        .then(() => {res.status(200).json({ message: "Like !" });})
                         .catch(error => res.status(400).json({ error }));
                     break;
+
                 case 0:
                     if (sauce.usersLiked.includes(userId)) {
                         Sauce.updateOne({ _id: req.params.id }, { $inc: { likes: -1 }, $pull: { usersLiked: userId } })
-                            .then(() => {
-                                res.status(200).json({ message: "Like retiré !" });
-                            })
+                            .then(() => {res.status(200).json({ message: "Like retiré !" });})
                             .catch(error => res.status(400).json({ error }));
                     } else if (sauce.usersDisliked.includes(userId)) {
                         Sauce.updateOne({ _id: req.params.id }, { $inc: { dislikes: -1 }, $pull: { usersDisliked: userId } })
-                            .then(() => {
-                                res.status(200).json({ message: "Dislike retiré !" });
-                            })
+                            .then(() => {res.status(200).json({ message: "Dislike retiré !" });})
                             .catch(error => res.status(400).json({ error }));
                     }
                     break;
+
                 case -1:
                     Sauce.updateOne({ _id: req.params.id }, { $inc: { dislikes: +1 }, $push: { usersDisliked: userId } })
-                        .then(() => {
-                            res.status(200).json({ message: "Dislike !" });
-                        })
+                        .then(() => {res.status(200).json({ message: "Dislike !" });})
                         .catch(error => res.status(400).json({ error }));
                     break;
                 default:

@@ -1,3 +1,4 @@
+//Import du framework express'
 const express = require('express');
 const mongoose = require('mongoose');
 //Import de dotenv pour sécuriser les mots de passes

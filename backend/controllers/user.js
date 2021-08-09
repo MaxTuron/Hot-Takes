@@ -1,5 +1,8 @@
-const User = require('../models/user');  // Import du modele de donnée
+// Import du modele de donnée
+const User = require('../models/user');
+//Petmer de hasher le mot de passe
 const bcrypt = require('bcrypt');
+//JSON web token
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
@@ -19,20 +22,25 @@ exports.signup = (req, res, next) => {
 
 
 exports.login = (req, res, next) => {
-    User.findOne({ email: req.body.email })   // On utilise le modèle mongoose User pour vérifier que l'email rentré correspond à un email de la bas de données
+    User.findOne({ email: req.body.email })
         .then(user => {
+            //Vérification de l'email
             if (!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé !' }); //Vérification de l'email
+                return res.status(401).json({ error: 'Utilisateur non trouvé !' });
             }
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
+                    //Vérification du mdp
                     if (!valid){
-                        return res.status(401).json({ error: 'Mot de passe incorrect !' }); //Vérification du mdp
+                        return res.status(401).json({ error: 'Mot de passe incorrect !' });
                     }
                     //Génération du Token
                     res.status(200).json({userId: user._id, token: jwt.sign(
+                            //ID utilisateur
                             { userId: user._id },
+                            //Chaîne secrète de développement temporaire
                             'RANDOM_TOKEN_SECRET',
+                            //Défini la durée du token
                             { expiresIn: '24h' })
                     });
                 })
