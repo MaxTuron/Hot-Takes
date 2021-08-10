@@ -87,7 +87,7 @@ exports.likeSauce = (req, res, next) => {
                     break;
 
                 case -1:
-                    Sauce.updateOne({ _id: req.params.id }, { $inc: { dislikes: +1 }, $push: { usersDisliked: userId } })
+                    Sauce.updateOne({ _id: req.params.id }, { $inc: { dislikes: 1 }, $push: { usersDisliked: userId } })
                         .then(() => {res.status(200).json({ message: "Dislike !" });})
                         .catch(error => res.status(400).json({ error }));
                     break;

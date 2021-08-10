@@ -33,7 +33,6 @@ app.use((req, res, next) => {
 //body parser
 app.use(express.json());
 
-
 //Permet de créer le dossier images si il n'existe pas
 if (!fs.existsSync(filesDir)) {
     fs.mkdirSync(filesDir);
